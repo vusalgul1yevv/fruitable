@@ -24,7 +24,7 @@ public class CategoryController {
     public String index(Model model){
         List<CategoryDto> categoryDtoList = categoryService.getDashboardCategories();
         model.addAttribute("categories",categoryDtoList);
-        return "dashboard/category/index.html";
+        return "dashboard/category/category.html";
     }
 
     @GetMapping("/create")
@@ -35,7 +35,7 @@ public class CategoryController {
     @PostMapping("/create")
     public String create(CategoryCreateDto categoryCreateDto){
         boolean result = categoryService.createCategory(categoryCreateDto);
-        return "redirect/dashboard/category/";
+        return "redirect:/dashboard/category/";
     }
 
     @GetMapping("/update/{id}")
@@ -48,6 +48,6 @@ public class CategoryController {
     @PostMapping("/update/{id}")
     public String update(@PathVariable Long id,CategoryUpdateDto categoryUpdateDto){
         boolean result = categoryService.updateCategory(id,categoryUpdateDto);
-        return "redirect/dashboard/category/";
+        return "redirect:/dashboard/category/";
     }
 }

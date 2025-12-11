@@ -27,8 +27,25 @@
         <div id="content">
 
             <!-- Begin Page Content -->
-            <div layout:fragment class="container-fluid">
+            <div layout:fragment="content" class="container-fluid">
+                <div class="card mb-4">
 
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Overflow Hidden Utility</h6>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="form-group">
+                                <label for="categoryName"></label>
+                                <input id="categoryName" name="name" type="text" class="form-control" placeholder="Category name">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-success" value="Create">
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
             </div>
             <!-- /.container-fluid -->
 
