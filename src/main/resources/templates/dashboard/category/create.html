@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{dashboard/layout}">
-
+      layout:decorate="~{dashboard/layout}" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">SB Admin 2 - Blank</title>
-
 </head>
 
 <body id="page-top">
@@ -37,7 +33,7 @@
                         <form method="post">
                             <div class="form-group">
                                 <label for="categoryName"></label>
-                                <input id="categoryName" name="name" type="text" class="form-control" placeholder="Category name">
+                                <input id="categoryName" th:value="${categoryName}" name="name" type="text" class="form-control" placeholder="Category name">
                             </div>
                             <div class="form-group">
                                 <input type="submit" class="btn btn-success" value="Create">

@@ -3,14 +3,12 @@ package com.example.fruitables.controllers.dashboard;
 import com.example.fruitables.dtos.category.CategoryCreateDto;
 import com.example.fruitables.dtos.category.CategoryDto;
 import com.example.fruitables.dtos.category.CategoryUpdateDto;
+import com.example.fruitables.entities.Category;
 import com.example.fruitables.services.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,7 +40,7 @@ public class CategoryController {
     public String update(@PathVariable Long id, Model model) {
         CategoryUpdateDto categoryUpdateDto = categoryService.getUpdatedCategory(id);
         model.addAttribute("category", categoryUpdateDto);
-        return "dashboard/category/update";
+        return "dashboard/category/update.html";
     }
 
     @PostMapping("/update/{id}")
@@ -50,4 +48,13 @@ public class CategoryController {
         boolean result = categoryService.updateCategory(id,categoryUpdateDto);
         return "redirect:/dashboard/category/";
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id,Model model){
+        boolean result = categoryService.removeCategory(id);
+        model.addAttribute("result",result);
+        return "redirect:/dashboard/category/";
+    }
+
+
 }

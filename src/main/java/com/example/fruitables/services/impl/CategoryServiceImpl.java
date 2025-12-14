@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -22,14 +23,12 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<CategoryDto> getDashboardCategories() {
         List<Category> categories = categoryRepository.findAll();
-        if(!categories.isEmpty()){
-            categories
-                    .stream()
-                    .map(category ->
-                            modelMapper.map(category, CategoryDto.class));
-        }
-        return List.of();
+        return categories.stream()
+                .map(c -> modelMapper.map(c, CategoryDto.class))
+                .collect(Collectors.toList());
     }
+
+
 
     @Override
     public boolean createCategory(CategoryCreateDto categoryCreateDto) {
@@ -63,4 +62,17 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
     }
+
+    @Override
+    public boolean removeCategory(Long id) {
+        try {
+            Category category = categoryRepository.findById(id)
+                    .orElse(new Category());
+            categoryRepository.delete(category);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }

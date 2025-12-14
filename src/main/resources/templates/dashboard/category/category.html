@@ -3,7 +3,6 @@
       layout:decorate="~{dashboard/layout}" xmlns:th="http://www.w3.org/1999/xhtml">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,11 +27,21 @@
 
             <!-- Begin Page Content -->
             <div layout:fragment="content" class="container-fluid">
-                <button class="btn btn-success">
-                    <a href="create.html" style="color:white; text-decoration:none;">Create</a>
-                </button>
+                <!-- Create button -->
+                <a class="btn btn-success"
+                   href="/dashboard/category/create">
+                    Create
+                </a>
 
-                <table class="table">
+                <!-- Delete success alert -->
+                <div th:if="${result}"
+                     class="alert alert-success my-3"
+                     role="alert">
+                    Category deleted successfully!
+                </div>
+
+                <!-- Category table -->
+                <table class="table mt-3">
                     <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
@@ -44,10 +53,23 @@
                     <tbody>
                     <tr th:each="category, i : ${categories}">
                         <th scope="row" th:text="${i.index + 1}">1</th>
-                        <td th:text="${category.name}">Category Name</td>
+
+                        <td th:text="${category.name}">
+                            Category Name
+                        </td>
+
                         <td>
-                            <a>Edit</a>
-                            <a>Delete</a>
+                            <!-- Edit -->
+                            <a class="btn btn-primary text-white px-3"
+                               th:href="@{/dashboard/category/update/{id}(id=${category.id})}">
+                                Edit
+                            </a>
+
+                            <!-- Delete -->
+                            <a class="btn btn-primary text-white"
+                               th:onclick="|deleteCategory(${category.id})|">
+                                Delete
+                            </a>
                         </td>
                     </tr>
                     </tbody>
